@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FTK | Settings</title>
+  <link rel="stylesheet" href="navbar.css">
+  <style>
+    :root { --text:#fff; --muted:#c3c3d1; }
+    * { box-sizing:border-box; margin:0; padding:0; }
+    body {
+      min-height:100vh; font-family:"Segoe UI", Tahoma, Geneva, Verdana, sans-serif; color:var(--text);
+      padding:20px; opacity:0; transition:opacity .35s ease;
+    }
+    body.page-ready { opacity:1; }
+    body.page-leave { opacity:0; }
+    .content { min-height:100vh; display:grid; place-items:center; padding-top:84px; }
+    .card {
+      width:min(720px, 100%); border-radius:20px; border:1px solid rgba(255,255,255,.16); background:rgba(255,255,255,.06);
+      backdrop-filter:blur(14px); box-shadow:0 20px 46px rgba(0,0,0,.45); padding:clamp(22px,3vw,34px);
+    }
+    h1 { font-size:clamp(1.5rem, 4vw, 2.3rem); margin-bottom:10px; }
+    .sub { color:var(--muted); margin-bottom:20px; line-height:1.7; }
+    .open-langs {
+      width:100%; border:1px solid rgba(255,255,255,.22); border-radius:12px; background:rgba(255,255,255,.08); color:#fff;
+      text-align:right; font-size:1rem; padding:14px; cursor:pointer; transition:background .2s ease, transform .2s ease;
+    }
+    .open-langs:hover { background:rgba(255,255,255,.14); transform:translateY(-1px); }
+    .lang-menu { margin-top:10px; display:none; padding:8px; border:1px solid rgba(255,255,255,.16); border-radius:12px; background:rgba(10,10,16,.72); }
+    .lang-menu.show { display:block; }
+    .lang-option { width:100%; border:0; border-radius:10px; background:transparent; color:#fff; text-align:right; padding:10px 12px; cursor:pointer; }
+    .lang-option:hover { background:rgba(255,255,255,.1); }
+  </style>
+</head>
+<body class="ftk-page">
+  <header class="topbar">
+    <div class="topbar-brand">FTK WEB</div>
+    <div class="topbar-actions">
+      <a class="nav-btn page-link" href="index.html" aria-label="الرئيسية">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8h5Z"></path></svg>
+      </a>
+      <a class="nav-btn page-link is-active" href="settings.html" aria-label="الإعدادات" aria-current="page">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.14 12.94a7.8 7.8 0 0 0 .05-.94 7.8 7.8 0 0 0-.05-.94l2.03-1.58a.5.5 0 0 0 .12-.64l-1.92-3.32a.5.5 0 0 0-.6-.22l-2.39.96a7.24 7.24 0 0 0-1.63-.94l-.36-2.54a.5.5 0 0 0-.5-.42h-3.84a.5.5 0 0 0-.5.42l-.36 2.54c-.58.23-1.12.54-1.63.94l-2.39-.96a.5.5 0 0 0-.6.22L2.7 8.84a.5.5 0 0 0 .12.64l2.03 1.58a7.8 7.8 0 0 0-.05.94c0 .32.02.63.05.94L2.82 14.52a.5.5 0 0 0-.12.64l1.92 3.32a.5.5 0 0 0 .6.22l2.39-.96c.51.4 1.05.71 1.63.94l.36 2.54a.5.5 0 0 0 .5.42h3.84a.5.5 0 0 0 .5-.42l.36-2.54c.58-.23 1.12-.54 1.63-.94l2.39.96a.5.5 0 0 0 .6-.22l1.92-3.32a.5.5 0 0 0-.12-.64Zm-7.14 2.56A3.5 3.5 0 1 1 12 8.5a3.5 3.5 0 0 1 0 7Z"></path></svg>
+      </a>
+      <a class="nav-btn page-link" href="team.html" aria-label="الفريق">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 12.5a5 5 0 1 0-5-5 5 5 0 0 0 5 5Zm0 2.5c-4.1 0-8 2-8 4.4V22h16v-2.6c0-2.4-3.9-4.4-8-4.4Z"></path></svg>
+      </a>
+      <a class="nav-btn page-link" href="projects.html" aria-label="المشاريع">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 21V11h5v2h3v-4l5-2v6h5v8H3Zm2-2h4v-5H5v5Zm6 0h4V9h-4v10zm6 0h4v-4h-4v4zM8 7V3h2v4H8zm4 0V4h2v3h-2z"></path></svg>
+      </a>
+    </div>
+  </header>
+
+  <main class="content" dir="rtl">
+    <section class="card">
+      <h1>الإعدادات</h1>
+      <p class="sub">من هنا تقدر تتحكم في اللغة بشكل مباشر.</p>
+      <button class="open-langs" id="openLangs">لتغيير اللغة دوس هنا</button>
+      <div class="lang-menu" id="langMenu">
+        <button class="lang-option" data-lang="fr">Francais</button>
+        <button class="lang-option" data-lang="ru">Russian</button>
+        <button class="lang-option" data-lang="ar">Arabic</button>
+        <button class="lang-option" data-lang="en">English</button>
+        <button class="lang-option" data-lang="de">Deutsch</button>
+        <button class="lang-option" data-lang="it">Italiano</button>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const openLangs = document.getElementById("openLangs");
+    const langMenu = document.getElementById("langMenu");
+    const options = Array.from(document.querySelectorAll(".lang-option"));
+
+    openLangs.addEventListener("click", () => {
+      langMenu.classList.toggle("show");
+    });
+
+    options.forEach((option) => {
+      option.addEventListener("click", () => {
+        const lang = option.getAttribute("data-lang");
+        localStorage.setItem("ftk_lang", lang);
+        document.body.classList.add("page-leave");
+        setTimeout(() => { window.location.href = "index.html"; }, 260);
+      });
+    });
+
+    requestAnimationFrame(() => document.body.classList.add("page-ready"));
+    document.querySelectorAll(".page-link").forEach((link) => {
+      link.addEventListener("click", (event) => {
+        event.preventDefault();
+        const target = link.getAttribute("href");
+        document.body.classList.add("page-leave");
+        setTimeout(() => { window.location.href = target; }, 260);
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FTK | Home</title>
+  <link rel="stylesheet" href="navbar.css">
+  <style>
+    :root {
+      --bg: #0b0b0f;
+      --bg-soft: #13131a;
+      --card: rgba(255, 255, 255, 0.06);
+      --text: #ffffff;
+      --muted: #b9b9c7;
+      --brand: #e50914;
+      --brand-soft: #ff3b3b;
+      --glow: 0 0 40px rgba(229, 9, 20, 0.35);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(229, 9, 20, 0.15), transparent 35%),
+        radial-gradient(circle at 80% 70%, rgba(229, 9, 20, 0.12), transparent 35%),
+        var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      overflow: visible;
+      opacity: 0;
+      transition: opacity 0.35s ease;
+    }
+
+    body.page-ready {
+      opacity: 1;
+    }
+
+    body.page-leave {
+      opacity: 0;
+    }
+
+    /* Opening screen */
+    .splash {
+      position: fixed;
+      inset: 0;
+      z-index: 50;
+      display: grid;
+      place-items: center;
+      background: #000;
+      transition: opacity 0.9s ease, visibility 0.9s ease;
+    }
+
+    .splash.hide {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .splash-logo {
+      text-align: center;
+      animation: zoomIn 1.5s ease forwards;
+    }
+
+    .splash-logo .brand {
+      font-size: clamp(2.8rem, 8vw, 7rem);
+      letter-spacing: 0.2em;
+      font-weight: 900;
+      color: var(--brand);
+      text-shadow: var(--glow);
+    }
+
+    .splash-logo p {
+      margin-top: 14px;
+      font-size: clamp(1rem, 1.8vw, 1.4rem);
+      color: #e6e6e6;
+      letter-spacing: 0.06em;
+    }
+
+    @keyframes zoomIn {
+      from {
+        transform: scale(0.65);
+        opacity: 0;
+      }
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    /* Main content */
+    .main {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 26px;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .main.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .hero {
+      width: min(980px, 100%);
+      background: linear-gradient(160deg, rgba(229, 9, 20, 0.12), rgba(19, 19, 26, 0.88));
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 22px;
+      box-shadow: 0 25px 70px rgba(0, 0, 0, 0.45);
+      padding: clamp(24px, 4vw, 48px);
+      backdrop-filter: blur(3px);
+    }
+
+    .pill {
+      display: inline-block;
+      background: rgba(229, 9, 20, 0.18);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #ffd7d7;
+      border-radius: 999px;
+      padding: 8px 14px;
+      font-size: 0.85rem;
+      letter-spacing: 0.04em;
+      margin-bottom: 14px;
+    }
+
+    h1 {
+      font-size: clamp(2rem, 5vw, 4rem);
+      margin-bottom: 10px;
+      line-height: 1.1;
+    }
+
+    h1 span {
+      color: var(--brand-soft);
+      text-shadow: var(--glow);
+    }
+
+    h2 {
+      font-size: clamp(1.2rem, 2.7vw, 2rem);
+      margin-bottom: 16px;
+      color: #f4f4f4;
+      font-weight: 650;
+    }
+
+    .intro {
+      color: var(--muted);
+      font-size: clamp(1rem, 1.8vw, 1.14rem);
+      line-height: 1.8;
+      margin-bottom: 22px;
+    }
+
+    .points {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+      margin-bottom: 26px;
+    }
+
+    .point {
+      background: var(--card);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 14px;
+      padding: 14px;
+      color: #f1f1f1;
+      font-size: 0.97rem;
+    }
+
+    .point strong {
+      color: #fff;
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    .cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      text-decoration: none;
+      background: linear-gradient(90deg, var(--brand), #ff2626);
+      color: #fff;
+      font-weight: 700;
+      border-radius: 10px;
+      padding: 12px 18px;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      box-shadow: 0 10px 26px rgba(229, 9, 20, 0.3);
+    }
+
+    .cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 16px 30px rgba(229, 9, 20, 0.36);
+    }
+
+    .main[dir="rtl"] .hero {
+      text-align: right;
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-brand">FTK WEB</div>
+    <div class="topbar-actions">
+      <button class="lang-toggle" id="langToggle" type="button" aria-label="تبديل اللغة">ENG</button>
+      <a class="nav-btn page-link is-active" href="index.html" aria-label="الرئيسية" aria-current="page">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8h5Z"></path></svg>
+      </a>
+      <a class="nav-btn page-link" href="settings.html" aria-label="الإعدادات">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.14 12.94a7.8 7.8 0 0 0 .05-.94 7.8 7.8 0 0 0-.05-.94l2.03-1.58a.5.5 0 0 0 .12-.64l-1.92-3.32a.5.5 0 0 0-.6-.22l-2.39.96a7.24 7.24 0 0 0-1.63-.94l-.36-2.54a.5.5 0 0 0-.5-.42h-3.84a.5.5 0 0 0-.5.42l-.36 2.54c-.58.23-1.12.54-1.63.94l-2.39-.96a.5.5 0 0 0-.6.22L2.7 8.84a.5.5 0 0 0 .12.64l2.03 1.58a7.8 7.8 0 0 0-.05.94c0 .32.02.63.05.94L2.82 14.52a.5.5 0 0 0-.12.64l1.92 3.32a.5.5 0 0 0 .6.22l2.39-.96c.51.4 1.05.71 1.63.94l.36 2.54a.5.5 0 0 0 .5.42h3.84a.5.5 0 0 0 .5-.42l.36-2.54c.58-.23 1.12-.54 1.63-.94l2.39.96a.5.5 0 0 0 .6-.22l1.92-3.32a.5.5 0 0 0-.12-.64Zm-7.14 2.56A3.5 3.5 0 1 1 12 8.5a3.5 3.5 0 0 1 0 7Z"></path></svg>
+      </a>
+      <a class="nav-btn page-link" href="team.html" aria-label="الفريق">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 12.5a5 5 0 1 0-5-5 5 5 0 0 0 5 5Zm0 2.5c-4.1 0-8 2-8 4.4V22h16v-2.6c0-2.4-3.9-4.4-8-4.4Z"></path></svg>
+      </a>
+      <a class="nav-btn page-link" href="projects.html" aria-label="المشاريع">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 21V11h5v2h3v-4l5-2v6h5v8H3Zm2-2h4v-5H5v5Zm6 0h4V9h-4v10zm6 0h4v-4h-4v4zM8 7V3h2v4H8zm4 0V4h2v3h-2z"></path></svg>
+      </a>
+    </div>
+  </header>
+
+  <section class="splash" id="splash">
+    <div class="splash-logo">
+      <div class="brand">FTK</div>
+      <p data-i18n="splashWelcome">WELCOME</p>
+    </div>
+  </section>
+
+  <main class="main" id="main">
+    <section class="hero">
+      <span class="pill" data-i18n="pillText">Professional Electronic Company</span>
+      <h1><span data-i18n="welcomePrefix">Welcome in Web</span> <span>Famtak</span></h1>
+      <h2 data-i18n="companyTitle">FTK Company</h2>
+
+      <p class="intro" data-i18n="introText">
+        FTK is a professional company specialized in building modern websites and smart digital solutions.
+        We deliver powerful design, high performance, and a premium user experience for every project.
+      </p>
+
+      <div class="points">
+        <article class="point">
+          <strong data-i18n="point1Title">Expert Engineers</strong>
+          <span data-i18n="point1Desc">Our team includes top software engineers with real experience in modern web technologies.</span>
+        </article>
+        <article class="point">
+          <strong data-i18n="point2Title">Professional Quality</strong>
+          <span data-i18n="point2Desc">We focus on clean code, security, speed, and scalable architecture for long-term success.</span>
+        </article>
+        <article class="point">
+          <strong data-i18n="point3Title">Digital Vision</strong>
+          <span data-i18n="point3Desc">FTK is an electronic company helping businesses transform ideas into impactful online platforms.</span>
+        </article>
+      </div>
+
+      <a class="cta page-link" href="contact.html" data-i18n="ctaText">Start Your Project with FTK</a>
+    </section>
+  </main>
+
+  <script>
+    const splash = document.getElementById("splash");
+    const main = document.getElementById("main");
+    const langToggle = document.getElementById("langToggle");
+    const pageLinks = Array.from(document.querySelectorAll(".page-link"));
+    let currentLang = "ar";
+
+    const translations = {
+      en: {
+        splashWelcome: "WELCOME",
+        pillText: "Professional Electronic Company",
+        welcomePrefix: "Welcome in Web",
+        companyTitle: "FTK Company",
+        introText: "FTK is a professional company specialized in building modern websites and smart digital solutions. We deliver powerful design, high performance, and a premium user experience for every project.",
+        point1Title: "Expert Engineers",
+        point1Desc: "Our team includes top software engineers with real experience in modern web technologies.",
+        point2Title: "Professional Quality",
+        point2Desc: "We focus on clean code, security, speed, and scalable architecture for long-term success.",
+        point3Title: "Digital Vision",
+        point3Desc: "FTK is an electronic company helping businesses transform ideas into impactful online platforms.",
+        ctaText: "Start Your Project with FTK"
+      },
+      fr: {
+        splashWelcome: "BIENVENUE",
+        pillText: "Entreprise electronique professionnelle",
+        welcomePrefix: "Bienvenue sur Web",
+        companyTitle: "Societe FTK",
+        introText: "FTK est une entreprise professionnelle specialisee dans la creation de sites web modernes et de solutions numeriques intelligentes. Nous offrons un design puissant, de hautes performances et une experience premium.",
+        point1Title: "Ingenieurs experts",
+        point1Desc: "Notre equipe comprend des ingenieurs logiciels de haut niveau avec une experience reelle des technologies web modernes.",
+        point2Title: "Qualite professionnelle",
+        point2Desc: "Nous nous concentrons sur un code propre, la securite, la rapidite et une architecture evolutive.",
+        point3Title: "Vision digitale",
+        point3Desc: "FTK aide les entreprises a transformer leurs idees en plateformes numeriques performantes.",
+        ctaText: "Demarrez votre projet avec FTK"
+      },
+      ru: {
+        splashWelcome: "DOBRO POZHALOVAT",
+        pillText: "Professionalnaya elektronnaya kompaniya",
+        welcomePrefix: "Dobro pozhalovat v Web",
+        companyTitle: "Kompaniya FTK",
+        introText: "FTK - professionalnaya kompaniya, specializiruyushchayasya na sozdanii sovremennykh saytov i umnykh tsifrovykh resheniy. My obespechivaem silnyy dizayn, vysokuyu skorost i premium-opyt.",
+        point1Title: "Luchshie inzhenery",
+        point1Desc: "Nasha komanda vklyuchaet opytnykh inzhenerov-programmistov v sovremennykh web-tekhnologiyakh.",
+        point2Title: "Professionalnoe kachestvo",
+        point2Desc: "My fokusiruemsya na chistom kode, bezopasnosti, skorosti i masshtabiruemoy arkhitekture.",
+        point3Title: "Tsifrovoye videnie",
+        point3Desc: "FTK pomogaet biznesu prevrashchat idei v effektivnye onlayn-platformy.",
+        ctaText: "Nachnite proekt s FTK"
+      },
+      ar: {
+        splashWelcome: "مرحبًا",
+        pillText: "شركة إلكترونية احترافية",
+        welcomePrefix: "مرحبًا بك في ويب",
+        companyTitle: "شركة FTK",
+        introText: "شركة FTK هي شركة محترفة متخصصة في صناعة المواقع الحديثة والحلول الرقمية الذكية. نقدم تصميمًا قويًا، أداءً عاليًا، وتجربة استخدام مميزة لكل مشروع.",
+        point1Title: "أفضل مهندسي البرمجة",
+        point1Desc: "فريقنا يضم نخبة من مهندسي البرمجة أصحاب الخبرة الحقيقية في أحدث تقنيات تطوير الويب.",
+        point2Title: "جودة احترافية",
+        point2Desc: "نركز على كود نظيف، أمان قوي، سرعة عالية، وبنية قابلة للتوسع لضمان نجاح طويل المدى.",
+        point3Title: "رؤية رقمية",
+        point3Desc: "FTK شركة إلكترونية تساعد الأعمال على تحويل الأفكار إلى منصات رقمية مؤثرة.",
+        ctaText: "ابدأ مشروعك الآن مع FTK"
+      },
+      de: {
+        splashWelcome: "WILLKOMMEN",
+        pillText: "Professionelles Elektronikunternehmen",
+        welcomePrefix: "Willkommen bei Web",
+        companyTitle: "FTK Unternehmen",
+        introText: "FTK ist ein professionelles Unternehmen fur moderne Webseiten und smarte digitale Losungen. Wir liefern starkes Design, hohe Leistung und eine hochwertige Nutzererfahrung.",
+        point1Title: "Experteningenieure",
+        point1Desc: "Unser Team besteht aus erfahrenen Softwareingenieuren mit moderner Web-Kompetenz.",
+        point2Title: "Professionelle Qualitat",
+        point2Desc: "Wir konzentrieren uns auf sauberen Code, Sicherheit, Geschwindigkeit und skalierbare Architektur.",
+        point3Title: "Digitale Vision",
+        point3Desc: "FTK hilft Unternehmen dabei, Ideen in wirkungsvolle Online-Plattformen umzuwandeln.",
+        ctaText: "Starten Sie Ihr Projekt mit FTK"
+      },
+      it: {
+        splashWelcome: "BENVENUTO",
+        pillText: "Azienda elettronica professionale",
+        welcomePrefix: "Benvenuto in Web",
+        companyTitle: "Azienda FTK",
+        introText: "FTK e un'azienda professionale specializzata nella creazione di siti web moderni e soluzioni digitali intelligenti. Offriamo design potente, alte prestazioni ed esperienza premium.",
+        point1Title: "Ingegneri esperti",
+        point1Desc: "Il nostro team include i migliori ingegneri software con esperienza reale nelle tecnologie web moderne.",
+        point2Title: "Qualita professionale",
+        point2Desc: "Ci concentriamo su codice pulito, sicurezza, velocita e architettura scalabile.",
+        point3Title: "Visione digitale",
+        point3Desc: "FTK aiuta le aziende a trasformare idee in piattaforme online efficaci.",
+        ctaText: "Avvia il tuo progetto con FTK"
+      }
+    };
+
+    function setLanguage(lang) {
+      const dict = translations[lang] || translations.en;
+      currentLang = lang;
+      document.documentElement.lang = lang;
+      main.setAttribute("dir", lang === "ar" ? "rtl" : "ltr");
+      langToggle.textContent = lang === "ar" ? "ENG" : "ع";
+      localStorage.setItem("ftk_lang", lang);
+
+      document.querySelectorAll("[data-i18n]").forEach((el) => {
+        const key = el.getAttribute("data-i18n");
+        if (dict[key]) {
+          el.textContent = dict[key];
+        }
+      });
+    }
+
+    langToggle.addEventListener("click", () => {
+      const nextLang = currentLang === "ar" ? "en" : "ar";
+      setLanguage(nextLang);
+    });
+
+    pageLinks.forEach((link) => {
+      link.addEventListener("click", (event) => {
+        event.preventDefault();
+        const target = link.getAttribute("href");
+        document.body.classList.add("page-leave");
+        setTimeout(() => {
+          window.location.href = target;
+        }, 260);
+      });
+    });
+
+    setTimeout(() => {
+      splash.classList.add("hide");
+      main.classList.add("show");
+      document.body.style.overflow = "auto";
+    }, 2500);
+
+    setLanguage(localStorage.getItem("ftk_lang") || "ar");
+    requestAnimationFrame(() => {
+      document.body.classList.add("page-ready");
+    });
+  </script>
+</body>
+</html>
