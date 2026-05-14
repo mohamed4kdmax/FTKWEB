@@ -1,0 +1,174 @@
+/* يُحمّل بعد أنماط الصفحة — تخطيط موبايل / ديسكتوب + safe-area */
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+img,
+video {
+  max-width: 100%;
+  height: auto;
+}
+
+/* الصفحة الرئيسية */
+body.home-page {
+  padding-left: max(0px, env(safe-area-inset-left));
+  padding-right: max(0px, env(safe-area-inset-right));
+  padding-bottom: max(0px, env(safe-area-inset-bottom));
+}
+
+body.home-page .main {
+  padding: clamp(12px, 4vw, 26px);
+  padding-top: max(5.5rem, calc(env(safe-area-inset-top, 0px) + 4.75rem));
+  padding-bottom: max(1.5rem, env(safe-area-inset-bottom, 0px));
+  min-height: 100dvh;
+  min-height: 100vh;
+}
+
+body.home-page .hero {
+  border-radius: clamp(14px, 4vw, 22px);
+  padding: clamp(18px, 5vw, 48px);
+}
+
+body.home-page .points {
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 560px) {
+  body.home-page .points {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+}
+
+@media (min-width: 900px) {
+  body.home-page .points {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  }
+}
+
+body.home-page .cta {
+  width: 100%;
+  max-width: 22rem;
+  min-height: 48px;
+  padding: 14px 20px;
+  box-sizing: border-box;
+}
+
+body.home-page .main[dir="rtl"] .cta {
+  margin-inline: 0;
+}
+
+@media (min-width: 480px) {
+  body.home-page .cta {
+    width: auto;
+  }
+}
+
+body.home-page .splash-logo .brand {
+  letter-spacing: clamp(0.08em, 2vw, 0.2em);
+}
+
+body.home-page h1,
+body.home-page h2,
+body.home-page .intro {
+  overflow-wrap: break-word;
+}
+
+/* صفحات داخلية */
+body.ftk-page {
+  padding-left: max(12px, env(safe-area-inset-left, 0px));
+  padding-right: max(12px, env(safe-area-inset-right, 0px));
+  padding-bottom: max(16px, env(safe-area-inset-bottom, 0px));
+}
+
+body.ftk-page .content {
+  padding-top: max(6rem, calc(env(safe-area-inset-top, 0px) + 4.75rem));
+  padding-bottom: max(1.5rem, env(safe-area-inset-bottom, 0px));
+  padding-inline: clamp(0px, 1vw, 8px);
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+body.ftk-page .content .card,
+body.ftk-page .card {
+  width: 100%;
+  max-width: min(960px, 100%);
+  box-sizing: border-box;
+  border-radius: clamp(14px, 3vw, 22px);
+}
+
+@media (max-width: 480px) {
+  body.ftk-page .content .card,
+  body.ftk-page .card {
+    padding: clamp(18px, 5vw, 28px);
+  }
+
+  body.ftk-page .open-langs,
+  body.ftk-page .lang-option {
+    min-height: 48px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
+}
+
+/* مشروع العيادة — معرض */
+body.ftk-page .gallery {
+  gap: clamp(16px, 4vw, 28px);
+}
+
+body.ftk-page .gallery figure {
+  border-radius: clamp(12px, 3vw, 16px);
+}
+
+body.ftk-page .gallery figcaption {
+  font-size: clamp(0.82rem, 2.8vw, 0.95rem);
+  padding: clamp(8px, 2vw, 14px);
+}
+
+body.ftk-page .cta,
+body.ftk-page .wa {
+  min-height: 48px;
+  box-sizing: border-box;
+}
+
+body.ftk-page .wa {
+  max-width: 100%;
+}
+
+body.ftk-page:has(.wrap) {
+  padding-top: max(6rem, calc(env(safe-area-inset-top, 0px) + 4.75rem));
+}
+
+body.ftk-page:has(.wrap) .wrap {
+  padding-top: 0;
+}
+
+/* صفحة التواصل */
+body.ftk-page .wrap {
+  width: 100%;
+  max-width: min(520px, 100%);
+  padding-inline: clamp(0px, 2vw, 8px);
+  box-sizing: border-box;
+}
+
+body.ftk-page .wrap .card {
+  padding: clamp(20px, 5vw, 40px);
+}
+
+body.ftk-page .sub,
+body.ftk-page .lead {
+  font-size: clamp(0.95rem, 3.2vw, 1.05rem);
+}
+
+body.ftk-page h1 {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+@media (min-width: 1024px) {
+  body.ftk-page .content {
+    padding-inline: 0;
+  }
+}
