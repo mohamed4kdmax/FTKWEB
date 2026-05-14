@@ -3,11 +3,11 @@
   direction: ltr;
   unicode-bidi: isolate;
   position: fixed;
-  top: 16px;
+  top: max(12px, env(safe-area-inset-top, 0px));
   left: 50%;
   transform: translateX(-50%);
   z-index: 80;
-  width: min(980px, calc(100% - 24px));
+  width: min(980px, calc(100% - max(24px, env(safe-area-inset-left, 0px) + env(safe-area-inset-right, 0px))));
   padding: 8px 10px;
   border-radius: 18px;
   border: 1px solid rgba(255, 255, 255, 0.16);
@@ -69,6 +69,7 @@
   justify-content: center;
   text-decoration: none;
   flex-shrink: 0;
+  touch-action: manipulation;
 }
 
 .nav-btn:hover {
@@ -120,6 +121,7 @@
   position: relative;
   overflow: hidden;
   flex-shrink: 0;
+  touch-action: manipulation;
 }
 
 .lang-toggle::after {
@@ -157,4 +159,85 @@ body.ftk-page {
     radial-gradient(circle at 20% 20%, rgba(229, 9, 20, 0.15), transparent 35%),
     radial-gradient(circle at 80% 70%, rgba(229, 9, 20, 0.12), transparent 35%),
     #0b0b0f;
+}
+
+/* ——— Tablet & phone ——— */
+@media (max-width: 768px) {
+  .topbar {
+    top: max(8px, env(safe-area-inset-top, 0px));
+    width: calc(100% - max(16px, env(safe-area-inset-left) + env(safe-area-inset-right)));
+    max-width: min(980px, 100% - 16px);
+    padding: 6px 8px;
+    border-radius: 14px;
+  }
+
+  .topbar-brand {
+    font-size: 0.72rem;
+    letter-spacing: 0.04em;
+    max-width: 4.5rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .topbar-actions {
+    gap: 6px;
+    flex-wrap: nowrap;
+    max-width: calc(100% - 5rem);
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding-bottom: 2px;
+  }
+
+  .topbar-actions::-webkit-scrollbar {
+    display: none;
+  }
+
+  .nav-btn,
+  .lang-toggle {
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    min-height: 44px;
+    border-radius: 10px;
+  }
+
+  .nav-btn svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .lang-toggle {
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 380px) {
+  .topbar-actions {
+    gap: 4px;
+  }
+
+  .nav-btn,
+  .lang-toggle {
+    width: 42px;
+    height: 42px;
+    min-width: 42px;
+    min-height: 42px;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .nav-btn:hover,
+  .lang-toggle:hover {
+    transform: scale(1.05);
+  }
+}
+
+@media (hover: none) {
+  .nav-btn:hover,
+  .lang-toggle:hover {
+    transform: none;
+  }
 }
