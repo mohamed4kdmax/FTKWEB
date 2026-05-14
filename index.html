@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>FTK | Home</title>
   <link rel="stylesheet" href="navbar.css">
   <style>
@@ -191,6 +191,7 @@
       padding: 12px 18px;
       transition: transform 0.25s ease, box-shadow 0.25s ease;
       box-shadow: 0 10px 26px rgba(229, 9, 20, 0.3);
+      touch-action: manipulation;
     }
 
     .cta:hover {
@@ -201,9 +202,16 @@
     .main[dir="rtl"] .hero {
       text-align: right;
     }
+
+    @media (hover: none) {
+      .cta:hover {
+        transform: none;
+      }
+    }
   </style>
+  <link rel="stylesheet" href="site-responsive.css">
 </head>
-<body>
+<body class="home-page">
   <header class="topbar">
     <div class="topbar-brand">FTK WEB</div>
     <div class="topbar-actions">
