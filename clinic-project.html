@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FTK | سيستم عيادة أونلاين</title>
+  <link rel="stylesheet" href="topbar.css">
+  <style>
+    :root { --card:rgba(255,255,255,.07); --text:#fff; --muted:#c6c6d4; --brand:#e50914; }
+    * { box-sizing:border-box; margin:0; padding:0; }
+    body {
+      min-height:100vh; font-family:"Segoe UI", Tahoma, Geneva, Verdana, sans-serif; color:var(--text);
+      padding:24px; opacity:0; transition:opacity .35s ease;
+    }
+    body.page-ready { opacity:1; }
+    body.page-leave { opacity:0; }
+    .content { min-height:100vh; display:grid; place-items:start center; padding-top:100px; padding-bottom:48px; width:100%; }
+    .card {
+      width:min(920px,100%); background:linear-gradient(150deg, rgba(255,255,255,.09), rgba(17,17,24,.92));
+      border:1px solid rgba(255,255,255,.12); border-radius:22px; padding:clamp(24px,3vw,42px); box-shadow:0 24px 60px rgba(0,0,0,.45);
+    }
+    h1 { font-size:clamp(1.6rem,4vw,2.2rem); margin-bottom:12px; line-height:1.25; }
+    .lead { color:var(--muted); line-height:1.95; font-size:1.05rem; margin-bottom:22px; }
+    .credit {
+      background:var(--card); border:1px solid rgba(255,255,255,.12); border-radius:14px; padding:16px 18px; margin-bottom:26px;
+      border-inline-start:4px solid var(--brand);
+    }
+    .credit strong { color:#fff; display:block; margin-bottom:6px; font-size:1.05rem; }
+    .credit span { color:var(--muted); line-height:1.8; }
+    .section-title { font-size:1.15rem; margin:26px 0 14px; color:#f2f2f8; }
+    .gallery {
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:28px;
+      margin-bottom:8px;
+    }
+    .gallery figure {
+      margin:0;
+      width:100%;
+      max-width:min(900px, 100%);
+      border-radius:16px;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(0,0,0,.25);
+      box-shadow:0 14px 40px rgba(0,0,0,.4);
+    }
+    .gallery img {
+      width:100%;
+      height:auto;
+      display:block;
+    }
+    .gallery figcaption { padding:12px 14px; font-size:.95rem; color:var(--muted); text-align:center; }
+    .features { list-style:none; display:grid; gap:10px; margin-bottom:28px; }
+    .features li {
+      background:var(--card); border:1px solid rgba(255,255,255,.1); border-radius:12px; padding:12px 14px;
+      display:flex; align-items:flex-start; gap:10px; line-height:1.7;
+    }
+    .features li::before { content:"✓"; color:var(--brand); font-weight:900; flex-shrink:0; margin-top:2px; }
+    .cta-wrap { text-align:center; margin-top:8px; }
+    .cta {
+      display:inline-flex; align-items:center; justify-content:center; gap:8px;
+      text-decoration:none; background:linear-gradient(90deg, var(--brand), #ff2626); color:#fff; font-weight:750;
+      border-radius:12px; padding:14px 22px; box-shadow:0 12px 28px rgba(229,9,20,.32); transition:transform .2s ease, box-shadow .2s ease;
+    }
+    .cta:hover { transform:translateY(-2px); box-shadow:0 16px 34px rgba(229,9,20,.38); }
+    .back { display:inline-block; margin-top:22px; color:var(--muted); text-decoration:none; font-size:.95rem; }
+    .back:hover { color:#fff; text-decoration:underline; }
+  </style>
+</head>
+<body class="ftk-page">
+  <header class="topbar">
+    <div class="topbar-brand">FTK WEB</div>
+    <div class="topbar-actions">
+      <a class="nav-btn page-link" href="my.html" aria-label="الرئيسية">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8h5Z"></path></svg>
+      </a>
+      <a class="nav-btn page-link" href="settings.html" aria-label="الإعدادات">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.14 12.94a7.8 7.8 0 0 0 .05-.94 7.8 7.8 0 0 0-.05-.94l2.03-1.58a.5.5 0 0 0 .12-.64l-1.92-3.32a.5.5 0 0 0-.6-.22l-2.39.96a7.24 7.24 0 0 0-1.63-.94l-.36-2.54a.5.5 0 0 0-.5-.42h-3.84a.5.5 0 0 0-.5.42l-.36 2.54c-.58.23-1.12.54-1.63.94l-2.39-.96a.5.5 0 0 0-.6.22L2.7 8.84a.5.5 0 0 0 .12.64l2.03 1.58a7.8 7.8 0 0 0-.05.94c0 .32.02.63.05.94L2.82 14.52a.5.5 0 0 0-.12.64l1.92 3.32a.5.5 0 0 0 .6.22l2.39-.96c.51.4 1.05.71 1.63.94l.36 2.54a.5.5 0 0 0 .5.42h3.84a.5.5 0 0 0 .5-.42l.36-2.54c.58-.23 1.12-.54 1.63-.94l2.39.96a.5.5 0 0 0 .6-.22l1.92-3.32a.5.5 0 0 0-.12-.64Zm-7.14 2.56A3.5 3.5 0 1 1 12 8.5a3.5 3.5 0 0 1 0 7Z"></path></svg>
+      </a>
+      <a class="nav-btn page-link" href="team.html" aria-label="الفريق">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 12.5a5 5 0 1 0-5-5 5 5 0 0 0 5 5Zm0 2.5c-4.1 0-8 2-8 4.4V22h16v-2.6c0-2.4-3.9-4.4-8-4.4Z"></path></svg>
+      </a>
+      <a class="nav-btn page-link is-active" href="projects.html" aria-label="المشاريع" aria-current="page">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 21V11h5v2h3v-4l5-2v6h5v8H3Zm2-2h4v-5H5v5Zm6 0h4V9h-4v10zm6 0h4v-4h-4v4zM8 7V3h2v4H8zm4 0V4h2v3h-2z"></path></svg>
+      </a>
+    </div>
+  </header>
+
+  <main class="content" dir="rtl">
+    <article class="card">
+      <h1>سيستم عيادة أونلاين — عيادة دكتور أحمد وجيه</h1>
+      <p class="lead">
+        هذا الموقع يقدّم منصة متكاملة لإدارة العيادة رقميًا: من تسجيل الدخول وإدارة الحسابات إلى لوحة تحكم واضحة للمواعيد والمرضى والإعدادات.
+        يسهّل على الطبيب والفريق متابعة العمل اليومي، ويمنح المريض مسارًا مبسطًا لمتابعة حالته دون تعقيد.
+      </p>
+
+      <div class="credit">
+        <strong>القائم على هذا المشروع</strong>
+        <span>مهندس <strong style="color:#fff;">محمد خالد</strong> — إشراف وتنفيذ تقني ضمن أعمال شركة FTK.</span>
+      </div>
+
+      <h2 class="section-title">صور من داخل الموقع</h2>
+      <div class="gallery">
+        <figure>
+          <img src="assets/clinic-dashboard.png" width="1200" height="675" alt="لوحة التحكم — الرئيسية">
+          <figcaption>لوحة التحكم والرئيسية</figcaption>
+        </figure>
+        <figure>
+          <img src="assets/clinic-login.png" width="1200" height="780" alt="صفحة تسجيل الدخول">
+          <figcaption>تسجيل الدخول والهوية البصرية</figcaption>
+        </figure>
+        <figure>
+          <img src="assets/clinic-settings.png" width="1200" height="675" alt="صفحة الإعدادات">
+          <figcaption>الإعدادات وخيارات النظام</figcaption>
+        </figure>
+      </div>
+
+      <h2 class="section-title">مزايا الموقع</h2>
+      <ul class="features">
+        <li>إضافة مرضى وتنظيم بياناتهم ضمن النظام.</li>
+        <li>تتابع حالتك المرضية بمسار واضح للمريض وللفريق الطبي.</li>
+        <li>الموقع مؤمن بطريقة جيدة — تصميم يراعي حماية البيانات والوصول.</li>
+      </ul>
+
+      <div class="cta-wrap">
+        <a class="cta" href="https://mohamed4kdmax.github.io/dr_ahmed/" target="_blank" rel="noopener noreferrer">لمشاهدة الموقع بنفسك</a>
+      </div>
+
+      <a class="back page-link" href="projects.html">← العودة إلى المشاريع</a>
+    </article>
+  </main>
+
+  <script>
+    requestAnimationFrame(() => document.body.classList.add("page-ready"));
+    document.querySelectorAll(".page-link").forEach((link) => {
+      link.addEventListener("click", (event) => {
+        event.preventDefault();
+        const target = link.getAttribute("href");
+        document.body.classList.add("page-leave");
+        setTimeout(() => { window.location.href = target; }, 260);
+      });
+    });
+  </script>
+</body>
+</html>
